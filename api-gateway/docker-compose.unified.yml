@@ -1,0 +1,111 @@
+services:
+  eureka-server:
+    image: nttdata/eureka-server:1.0.0
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    restart: unless-stopped
+    networks:
+      - microservices-net
+
+  config-server:
+    image: nttdata/config-server:1.0.0
+    container_name: config-server
+    depends_on:
+      - eureka-server
+    ports:
+      - "8888:8888"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    restart: unless-stopped
+    networks:
+      - microservices-net
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nttdata/api-gateway:1.0.0
+    container_name: api-gateway
+    depends_on:
+      - eureka-server
+      - config-server
+    ports:
+      - "7000:7000"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    restart: unless-stopped
+    networks:
+      - microservices-net
+
+  auth-service:
+    image: nttdata/auth-service:1.0.0
+    container_name: auth-service
+    depends_on:
+      - eureka-server
+      - config-server
+    ports:
+      - "7001:7001"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+    restart: unless-stopped
+    networks:
+      - microservices-net
+
+  customer-service:
+    image: nttdata/customer-service:1.0.0
+    container_name: customer-service
+    depends_on:
+      - eureka-server
+      - config-server
+    ports:
+      - "7002:7002"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+    restart: unless-stopped
+    networks:
+      - microservices-net
+
+  account-service:
+    image: nttdata/account-service:1.0.0
+    container_name: account-service
+    depends_on:
+      - eureka-server
+      - config-server
+    ports:
+      - "7003:7003"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+    restart: unless-stopped
+    networks:
+      - microservices-net
+
+  credit-service:
+    image: nttdata/credit-service:1.0.0
+    container_name: credit-service
+    depends_on:
+      - eureka-server
+      - config-server
+    ports:
+      - "7004:7004"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+    restart: unless-stopped
+    networks:
+      - microservices-net
+
+networks:
+  microservices-net:
+    driver: bridge
+

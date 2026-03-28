@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: api-gateway
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  config:
+    # Usa la URL definida por entorno; evita fallback implícito a localhost cuando corre en contenedor.
+    import: ${SPRING_CONFIG_IMPORT:optional:configserver:http://host.docker.internal:8888}
+  cloud:
+    config:
+      discovery:
+        enabled: ${SPRING_CLOUD_CONFIG_DISCOVERY_ENABLED:false}
+        service-id: config-server

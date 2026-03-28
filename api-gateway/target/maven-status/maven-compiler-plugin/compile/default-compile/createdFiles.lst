@@ -1,0 +1,5 @@
+com\nttdata\apigateway\config\SecurityConfig.class
+com\nttdata\apigateway\config\OpenApiConfig.class
+com\nttdata\apigateway\filter\CorrelationIdFilter.class
+com\nttdata\apigateway\ApiGatewayApplication.class
+com\nttdata\apigateway\filter\JwtAuthenticationFilter.class

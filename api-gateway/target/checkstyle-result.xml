@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.12.4">
+<file name="D:\Proyecto\NTTFinal\Microservicios\api-gateway\src\main\java\com\nttdata\apigateway\ApiGatewayApplication.java">
+</file>
+<file name="D:\Proyecto\NTTFinal\Microservicios\api-gateway\src\main\java\com\nttdata\apigateway\config\OpenApiConfig.java">
+</file>
+<file name="D:\Proyecto\NTTFinal\Microservicios\api-gateway\src\main\java\com\nttdata\apigateway\config\SecurityConfig.java">
+</file>
+<file name="D:\Proyecto\NTTFinal\Microservicios\api-gateway\src\main\java\com\nttdata\apigateway\filter\CorrelationIdFilter.java">
+</file>
+<file name="D:\Proyecto\NTTFinal\Microservicios\api-gateway\src\main\java\com\nttdata\apigateway\filter\JwtAuthenticationFilter.java">
+</file>
+</checkstyle>

@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    image: nttdata/api-gateway:1.0.0
+    ports:
+      - "7000:7000"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_CONFIG_IMPORT: 'optional:configserver:http://host.docker.internal:8888'
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://host.docker.internal:8761/eureka'
+      SPRING_APPLICATION_JSON: '{"eureka":{"instance":{"prefer-ip-address":true}},"spring":{"cloud":{"gateway":{"routes":[{"id":"auth-service","uri":"lb://auth-service","predicates":["Path=/api/auth/**"]},{"id":"customer-service","uri":"lb://customer-service","predicates":["Path=/api/customers/**"]},{"id":"account-service","uri":"lb://account-service","predicates":["Path=/api/accounts/**"]},{"id":"credit-service","uri":"lb://credit-service","predicates":["Path=/api/credits/**"]}]}}}}'
+    restart: unless-stopped

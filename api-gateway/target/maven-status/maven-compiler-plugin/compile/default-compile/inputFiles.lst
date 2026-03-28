@@ -1,0 +1,5 @@
+D:\Proyecto\NTTFinal\Microservicios\api-gateway\src\main\java\com\nttdata\apigateway\ApiGatewayApplication.java
+D:\Proyecto\NTTFinal\Microservicios\api-gateway\src\main\java\com\nttdata\apigateway\filter\JwtAuthenticationFilter.java
+D:\Proyecto\NTTFinal\Microservicios\api-gateway\src\main\java\com\nttdata\apigateway\filter\CorrelationIdFilter.java
+D:\Proyecto\NTTFinal\Microservicios\api-gateway\src\main\java\com\nttdata\apigateway\config\OpenApiConfig.java
+D:\Proyecto\NTTFinal\Microservicios\api-gateway\src\main\java\com\nttdata\apigateway\config\SecurityConfig.java
